@@ -53,6 +53,14 @@ public class insuranceTest {
         fillField(By.name("//input [@name ='name']"),"Виктор");
         fillField(By.name("//input [@name ='middlename']"),"Иакович");
         fillField(By.name("//input [@name ='birthDate']"),"Иакович");
+        //input[@placeholder= 'Серия']
+        //input[@placeholder= 'Номер']
+        //input[@name='issueDate']
+        //textarea[@name='issuePlace']
+        //span[contains(text(),'Продолжить')]
+
+
+        //div[contains(text(),'Заполнены не все обязательные поля')]
 
     }
 
@@ -61,10 +69,8 @@ public class insuranceTest {
             driver.findElement(xPath).sendKeys(value);
     }
 
-
-
     @After
     public void afterTest() {
-
+        driver.quit();
     }
 }
