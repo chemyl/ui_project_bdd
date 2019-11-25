@@ -46,10 +46,13 @@ public class insuranceTest {
         Assert.assertTrue(secondPage.isDisplayed());
         driver.findElement(By.xpath("//*[contains(text(),'Минимальная')]")).click();
         driver.findElement(By.xpath("//*[contains(text(),'Оформить')]")).click();
-        fillField(By.xpath("//*[contains(text(),'Введите Фамилию на латинице')]"), "Punkip");
-        fillField(By.xpath("//*[contains(text(),'Введите Имя на латинице')]"), "Petya");
-
-
+        fillField(By.xpath("//*[contains(text(),'Введите Фамилию на латинице')]"), "Punkip");          ////insured-input/div/fieldset[2]/div/span
+        fillField(By.xpath("//*[contains(text(),'Введите Имя на латинице')]"), "Petya");                       ////insured-input/div/fieldset[1]/div/span
+        fillField(By.id("//*[@id='dp1574709754507']"),"02051993");
+        fillField(By.name("//input [@name ='surname']"),"Лушевич");
+        fillField(By.name("//input [@name ='name']"),"Виктор");
+        fillField(By.name("//input [@name ='middlename']"),"Иакович");
+        fillField(By.name("//input [@name ='birthDate']"),"Иакович");
 
     }
 
