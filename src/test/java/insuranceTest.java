@@ -6,11 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,35 +34,35 @@ public class insuranceTest {
     public void mainTest() {
         driver.findElement(By.xpath("//span[contains(text(),'Страхование')]")).click();
         driver.findElement(By.xpath("//a[contains(text(), 'Страхование путешественников')]")).click();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        String pageTitle  = driver.findElement(By.xpath("//h1[contains(text(), 'Страхование путешественников')]")).getText();
-        Assert.assertEquals("777", "Страхование путешественников ",pageTitle);
-        driver.findElement(By.xpath("//a[contains (text(),'Оформить сейчас')]")).click();
-            WebElement secondPage = driver.findElement(By.xpath("//span[contains (text(),'Выбор полиса')]"));
-        Assert.assertTrue(secondPage.isDisplayed());
-        driver.findElement(By.xpath("//*[contains(text(),'Минимальная')]")).click();
-        driver.findElement(By.xpath("//*[contains(text(),'Оформить')]")).click();
-        fillField(By.xpath("//*[contains(text(),'Введите Фамилию на латинице')]"), "Punkip");          ////insured-input/div/fieldset[2]/div/span
-        fillField(By.xpath("//*[contains(text(),'Введите Имя на латинице')]"), "Petya");                       ////insured-input/div/fieldset[1]/div/span
-        fillField(By.id("//*[@id='dp1574709754507']"),"02051993");
-        fillField(By.name("//input [@name ='surname']"),"Лушевич");
-        fillField(By.name("//input [@name ='name']"),"Виктор");
-        fillField(By.name("//input [@name ='middlename']"),"Иакович");
-        fillField(By.name("//input [@name ='birthDate']"),"Иакович");
-        //input[@placeholder= 'Серия']
-        //input[@placeholder= 'Номер']
-        //input[@name='issueDate']
-        //textarea[@name='issuePlace']
-        //span[contains(text(),'Продолжить')]
-
-
-        //div[contains(text(),'Заполнены не все обязательные поля')]
-
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);   //неявное ожидание (просто определенное время)
+        String pageTitle = driver.findElement(By.xpath("//h1[contains(text(), 'Страхование путешественников')]")).getText();
+        Assert.assertEquals("777", "Страхование путешественников", pageTitle);
+        driver.findElement(By.xpath("//a[@target ='_blank']/..//img")).click();
+        ArrayList tabs2 = new ArrayList(driver.getWindowHandles()); //Получение списка табов
+        driver.switchTo().window(String.valueOf(tabs2.get(1)));      // переключение на вторую вкладку
+        WebElement secondPageOpen = driver.findElement(By.xpath("//div[contains(text(),'Минимальная')]"));
+        Assert.assertTrue(secondPageOpen.isEnabled());
+        driver.findElement(By.xpath("//div[contains(text(),'Минимальная')]")).click();
+        driver.findElement(By.xpath("//span[@class = 'b-continue-btn']")).click();
+        fillField(By.xpath("//input[@ng-model='namespace.SURNAME_ENG']"), "Punkip");          ////insured-input/div/fieldset[2]/div/span
+        fillField(By.xpath("//input[@ng-model= 'namespace.NAME_ENG']"), "Petya");                       ////insured-input/div/fieldset[1]/div/span
+        fillField(By.xpath("//input[@ng-model= 'namespace.BIRTHDATE']"), "02051993");
+        fillField(By.xpath("//input [@name ='surname']"), "Лушевич");
+        fillField(By.xpath("//input [@name ='name']"), "Виктор");
+        fillField(By.xpath("//input [@name ='middlename']"), "Иакович");
+        fillField(By.xpath("//input [@name ='birthDate']"), "Иакович");
+        fillField(By.xpath("//input[@placeholder= 'Серия']"), "4515");
+        fillField(By.xpath("//input[@placeholder= 'Номер']"), "441526");
+        fillField(By.xpath("//input[@name='issueDate']"), "18122015");
+        fillField(By.xpath("//textarea[@name='issuePlace']"), "ОУМВД по гор. Москве р-ну Коньково");
+        driver.findElement(By.xpath("//span[contains(text(),'Продолжить')]")).click();  //кнопка подтверждения
+        Assert.assertEquals("Текст ошибки не корректный", "Заполнены не все обязательные поля",
+                driver.findElement(By.xpath("//div[contains(text(),'Заполнены не все обязательные поля')]")).getText());  //проверка текстовки ошибки
     }
 
-    public void fillField(By xPath, String value){
-            driver.findElement(xPath).clear();
-            driver.findElement(xPath).sendKeys(value);
+    public void fillField(By xPath, String value) {
+        driver.findElement(xPath).clear();
+        driver.findElement(xPath).sendKeys(value);
     }
 
     @After
