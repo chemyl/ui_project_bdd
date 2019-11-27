@@ -56,6 +56,7 @@ public class insuranceTest {
         fillField(By.xpath("//input[@placeholder= 'Номер']"), "441526");
         fillField(By.xpath("//input[@name='issueDate']"), "18122015");
         fillField(By.xpath("//textarea[@name='issuePlace']"), "ОУМВД по гор. Москве р-ну Коньково");
+
         driver.findElement(By.xpath("//span[contains(text(),'Продолжить')]")).click();  //кнопка подтверждения
         Assert.assertEquals("Текст ошибки не корректный", "Заполнены не все обязательные поля",
                 driver.findElement(By.xpath("//div[contains(text(),'Заполнены не все обязательные поля')]")).getText());  //проверка текстовки ошибки

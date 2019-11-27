@@ -74,11 +74,7 @@ public class ConfigPolyPage extends BasePage {
         fillField(fieldName,value);
     }
 
-
-
-
-
-    public void checkFieldErrorMessage(String field, String errorMessage) {
+    public void checkFieldErrorMessage(String errorMessage) {
         String actualValue = driver.findElement(By.xpath("//div[contains(text(),'"+ errorMessage +"')]")).getText();
         Assert.assertEquals("Получено некорректное значение ошибки","Заполнены не все обязательные поля", actualValue );
     }
