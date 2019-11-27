@@ -1,7 +1,4 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,21 +26,25 @@ public class insuranceTest {
         driver.manage().window().maximize();
         driver.get(baseURL);
     }
-
-    @Test
+//    @Ignore
+//    @Test
     public void mainTest() {
         driver.findElement(By.xpath("//span[contains(text(),'Страхование')]")).click();
+
         driver.findElement(By.xpath("//a[contains(text(), 'Страхование путешественников')]")).click();
+
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);   //неявное ожидание (просто определенное время)
         String pageTitle = driver.findElement(By.xpath("//h1[contains(text(), 'Страхование путешественников')]")).getText();
         Assert.assertEquals("777", "Страхование путешественников", pageTitle);
         driver.findElement(By.xpath("//a[@target ='_blank']/..//img")).click();
         ArrayList tabs2 = new ArrayList(driver.getWindowHandles()); //Получение списка табов
         driver.switchTo().window(String.valueOf(tabs2.get(1)));      // переключение на вторую вкладку
+
         WebElement secondPageOpen = driver.findElement(By.xpath("//div[contains(text(),'Минимальная')]"));
         Assert.assertTrue(secondPageOpen.isEnabled());
         driver.findElement(By.xpath("//div[contains(text(),'Минимальная')]")).click();
         driver.findElement(By.xpath("//span[@class = 'b-continue-btn']")).click();
+
         fillField(By.xpath("//input[@ng-model='namespace.SURNAME_ENG']"), "Punkip");          ////insured-input/div/fieldset[2]/div/span
         fillField(By.xpath("//input[@ng-model= 'namespace.NAME_ENG']"), "Petya");                       ////insured-input/div/fieldset[1]/div/span
         fillField(By.xpath("//input[@ng-model= 'namespace.BIRTHDATE']"), "02051993");
