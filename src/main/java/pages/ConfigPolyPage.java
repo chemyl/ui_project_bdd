@@ -2,15 +2,12 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import sun.awt.windows.WEmbeddedFrame;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Created by Maltsev A.A
@@ -74,7 +71,7 @@ public class ConfigPolyPage extends BasePage {
         fillField(fieldName,value);
     }
 
-    public void checkFieldErrorMessage(String errorMessage) {
+    public void checkFieldErrorMessage(String errorMessage) {                           //проверка текстовки всплывающей ошибки
         String actualValue = driver.findElement(By.xpath("//div[contains(text(),'"+ errorMessage +"')]")).getText();
         Assert.assertEquals("Получено некорректное значение ошибки","Заполнены не все обязательные поля", actualValue );
     }

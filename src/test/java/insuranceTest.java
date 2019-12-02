@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by
- * chemyl.inc
- * on 25/11/19
+ * Created by Maltsev A.A
  */
 
 

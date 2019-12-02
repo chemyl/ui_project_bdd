@@ -1,4 +1,3 @@
-import pages.BasePage;
 
 import org.junit.Test;
 import pages.ConfigPolyPage;
