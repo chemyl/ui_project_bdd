@@ -8,8 +8,8 @@ import steps.BaseSteps;
 
 public class RefactorPOMTest extends BaseSteps {
 
-    @Test
-    @Ignore
+//    @Test
+//    @Ignore
     public void testInsurance() throws Exception {
         driver.get(baseUrl);                                            //переход на baseUrl
         MainPage mainPage = new MainPage(driver);                       //инициализация главной страницы

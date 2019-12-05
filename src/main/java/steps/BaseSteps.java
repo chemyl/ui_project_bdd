@@ -13,11 +13,23 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Базовый класс шагов, который собирает
+ * глобальные методы библиотек и фреймворков
+ * Before/AfterClass Attachment
+ * Создание driver,properties const
+ *
+ * */
+
 
 public class BaseSteps {
     protected static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -55,11 +67,6 @@ public class BaseSteps {
         }
     }
 
-    protected void fillField(By locator, String value) {
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(value);
-    }
-
     protected void checkFillField(String value, By locator) {
         assertEquals(value, driver.findElement(locator).getAttribute("value"));
     }
@@ -71,8 +78,5 @@ public class BaseSteps {
      * который делает скриншот
      * */
 
-    @Attachment(type = "image/png", value = "Screenshot")
-    public static byte[] takeScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
+
 }

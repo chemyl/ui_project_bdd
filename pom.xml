@@ -59,7 +59,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>my.company.util.AllureListener</value>
+                            <value>util.AllureListener</value>
                         </property>
                     </properties>
                 </configuration>

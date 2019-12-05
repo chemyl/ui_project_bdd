@@ -8,6 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by Maltsev A.A
+ *
+ * Класс работы с главной страницей sberbank.ru/ru/person
+ * имплеметнация WebElement и методов с необходимыми действиями
+ *
  */
 
 public class MainPage extends BasePage{

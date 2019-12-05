@@ -23,23 +23,23 @@ public class TestWithSteps extends BaseSteps {
     @Test
     @Title("Заявка на страхование")
     public void sberInsuranceStepTest(){
-        HashMap<WebElement,String> userFields = new HashMap<>();
+        HashMap<String,String> userFields = new HashMap<>();
 
         mainPageSteps.selectMenuItem("Страхование");
         mainPageSteps.selectInsuranceItem("Страхование для туристов");
         travelPageSteps.clickOnlineRegistrationBtn();
-        configPageSteps.stepFillHashMap("Имя", "Pupkin");
-        configPageSteps.stepFillHashMap("Фамилия", "Pupkin");
-        configPageSteps.stepFillHashMap("День рождения", "01071980");
-        configPageSteps.stepFillHashMap("Фамилия страхователя", "Лушевич");
-        configPageSteps.stepFillHashMap("Имя страхователя", "Лавр");
-        configPageSteps.stepFillHashMap("Отчество страхователя", "Поликарпович");
-        configPageSteps.stepFillHashMap("Серия паспорта страхователя", "4515");
-        configPageSteps.stepFillHashMap("Номер паспорта страхователя", "558669");
-        configPageSteps.stepFillHashMap("Серия паспорта страхователя", "4515");
-        configPageSteps.stepFillHashMap("Дата выдачи паспорта страхователя", "18122015");
-        configPageSteps.stepFillHashMap("Место выдачи паспорта страхователя", "ОУМВД по гор. Москве р-ну Коньково");
-        configPageSteps.StepAllFieldFill(userFields);
+        userFields.put("Имя", "Pupkin");
+        userFields.put("Фамилия", "Pupkin");
+        userFields.put("День рождения", "01071980");
+        userFields.put("Фамилия страхователя", "Лушевич");
+        userFields.put("Имя страхователя", "Лавр");
+        userFields.put("Отчество страхователя", "Поликарпович");
+        userFields.put("Номер паспорта страхователя", "558669");
+        userFields.put("Серия паспорта страхователя", "4515");
+        userFields.put("Дата выдачи паспорта страхователя", "18122015");
+        userFields.put("Место выдачи паспорта страхователя", "ОУМВД по гор. Москве р-ну Коньково");
+
+        configPageSteps.setUpInput(userFields);
         configPageSteps.checkErrorText("Заполнены не все обязательные поля");
     }
 }
