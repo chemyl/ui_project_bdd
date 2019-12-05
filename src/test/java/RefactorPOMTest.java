@@ -1,12 +1,15 @@
 
+import org.junit.Ignore;
 import org.junit.Test;
 import pages.ConfigPolyPage;
 import pages.MainPage;
 import pages.TravelInsurancePage;
+import steps.BaseSteps;
 
-public class RefactorPOMTest extends BaseTest {
+public class RefactorPOMTest extends BaseSteps {
 
     @Test
+    @Ignore
     public void testInsurance() throws Exception {
         driver.get(baseUrl);                                            //переход на baseUrl
         MainPage mainPage = new MainPage(driver);                       //инициализация главной страницы

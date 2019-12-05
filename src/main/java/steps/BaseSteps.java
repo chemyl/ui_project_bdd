@@ -1,14 +1,12 @@
+package steps;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.yandex.qatools.allure.annotations.Attachment;
+import util.TestProperties;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -16,11 +14,10 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 
-public class BaseTest {
+public class BaseSteps {
     protected static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
-
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -65,5 +62,17 @@ public class BaseTest {
 
     protected void checkFillField(String value, By locator) {
         assertEquals(value, driver.findElement(locator).getAttribute("value"));
+    }
+
+    /**
+     * Allure позволяет прикладывать файлы используя аннотацию Attachment
+     * type - тип прикладываемого файла value - название файла в будущем отчете
+     * Метод возвращает массив байтов. Используетмся метод getScreenshotAs (Selenium)
+     * который делает скриншот
+     * */
+
+    @Attachment(type = "image/png", value = "Screenshot")
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

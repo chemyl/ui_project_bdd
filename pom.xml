@@ -4,33 +4,83 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+<!--        ИМЕНОВАНИЕ ПРОЕКТА-->
     <groupId>com.home.work</groupId>
     <artifactId>sberInsurance</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+<!--        БЛОК ПЕРЕМЕННЫХ ДЛЯ ВЕРСИЙ ЗАВИСИМОСТЕЙ ПРОЕКТА-->
+    <properties>
+        <allure.version>1.5.2</allure.version>
+        <aspectj.version>1.8.9</aspectj.version>
+        <compiler.version>1.8</compiler.version>
+        <selenium.version>3.8.0</selenium.version>
+    </properties>
+
     <dependencies>
+<!--        ЗАВИСИМОСТЬ ДЛЯ JUNIT ALLURE ADAPTOR-->
         <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-junit-adaptor</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+<!--        ЗАВИСИСМОСТЬ ДЛЯ LIBRARY SELENIUM-->
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
+<!--        БИБИЛИОТЕКА ДЛЯ ПРОТОКОЛИРОВАНИЯ/ЛОГИРОВАНИЯ-->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
         </dependency>
-
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.19.1</version>
+<!--        ЗАВИСИМОСТЬ ДЛЯ ASPECTJ -->
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
-
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
+<!--        PLUGIN SUREFIRE ДЛЯ ЗАПУСКА-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>my.company.util.AllureListener</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+            <plugin>
+<!--        PLUGIN ДЛЯ ЗАПУСКА ОТЧЕТА НА POST-INTEGRATION СТАДИИ-->
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>allure-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+<!--        PLUGIN ДЛЯ MAVEN COMPILER-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -38,11 +88,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-            </plugin>
         </plugins>
     </build>
+
 </project>

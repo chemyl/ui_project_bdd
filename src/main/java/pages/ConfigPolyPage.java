@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.HashMap;
+
 /**
  * Created by Maltsev A.A
  */
@@ -67,11 +69,80 @@ public class ConfigPolyPage extends BasePage {
         this.driver = driver;
     }
 
-    public void inputFields (WebElement fieldName, String value) {  //метод заполнения полей на странице
-        fillField(fieldName,value);
+    public HashMap<WebElement, String> fillHashMap(String fieldName, String value){
+        HashMap<WebElement,String> userFields = new HashMap<>();
+        switch (fieldName){
+            case  "Фамилия":
+                userFields.put(surNameInsurant, value);
+                break;
+            case  "Имя":
+                userFields.put(nameInsurant, value);
+                break;
+            case  "День рождения":
+                userFields.put(birthDateInsurant, value);
+                break;
+            case  "Фамилия страхователя":
+                userFields.put(surNamePolicyHolder, value);
+                break;
+            case  "Имя страхователя":
+                userFields.put(namePolicyHolder, value);
+                break;
+            case  "Отчество страхователя":
+                userFields.put(middleNamePolicyHolder, value);
+                break;
+            case  "День рождения страхователя":
+                userFields.put(birthDatePolicyHolder, value);
+                break;
+            case  "Серия паспорта страхователя":
+                userFields.put(docSeriesPolicyHolder, value);
+                break;
+            case  "Номер паспорта страхователя":
+                userFields.put(docNumberPolicyHolder, value);
+                break;
+            case  "Место выдачи паспорта страхователя":
+                userFields.put(docIssuePlace, value);
+                break;
+            default:  throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
+        }
+        return userFields;
     }
 
-    public void checkFieldErrorMessage(String errorMessage) {                           //проверка текстовки всплывающей ошибки
+    public void fillField(String fieldName, String value){
+        switch (fieldName){
+            case  "Фамилия":
+                fillField(surNameInsurant, value);
+                break;
+            case  "Имя":
+                fillField(nameInsurant, value);
+                break;
+            case  "День рождения":
+                fillField(birthDateInsurant, value);
+                break;
+            case  "Фамилия страхователя":
+                fillField(surNamePolicyHolder, value);
+                break;
+            case  "Имя страхователя":
+                fillField(namePolicyHolder, value);
+                break;
+            case  "Отчество страхователя":
+                fillField(middleNamePolicyHolder, value);
+                break;
+            case  "День рождения страхователя":
+                fillField(birthDatePolicyHolder, value);
+                break;
+            case  "Серия паспорта страхователя":
+                fillField(docSeriesPolicyHolder, value);
+                break;
+            case  "Номер паспорта страхователя":
+                fillField(docNumberPolicyHolder, value);
+                break;
+            case  "Место выдачи паспорта страхователя":
+                fillField(docIssuePlace, value);
+                break;
+            default:  throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
+        }
+    }
+    public void checkFieldErrorMessage(String errorMessage) {  //проверка текстовки всплывающей ошибки
         String actualValue = driver.findElement(By.xpath("//div[contains(text(),'"+ errorMessage +"')]")).getText();
         Assert.assertEquals("Получено некорректное значение ошибки","Заполнены не все обязательные поля", actualValue );
     }
