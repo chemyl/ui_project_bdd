@@ -9,18 +9,20 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.HashMap;
-
 /**
- * Created by Maltsev A.A
+ * Класс страницы со всеми необходимыми полями ввода значений,
+ * кнопками и методами работы с ними
  */
 
-public class ConfigPolyPage extends BasePage {
-
+public class ConfigPolyPage {
+    WebDriver driver;
+    /**
+     * --------------     инициализация нужных webElement на странице по xpath  --------------
+     */
     @FindBy(xpath = "//span[contains(text(),'Выбор полиса')]")      //первая вкладка страницы
     public WebElement pageLoadTrigger;
 
-    @FindBy(xpath = "//div[contains(text(),'Минимальная')]")
+    @FindBy(xpath = "//div[contains(text(),'Минимальная')]")       //ставка страхования
     public WebElement insuranceSumm;
 
     @FindBy(xpath = "//span[@class = 'b-continue-btn']")
@@ -62,56 +64,72 @@ public class ConfigPolyPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Продолжить')]")
     public WebElement confirmBtn;
 
-    public ConfigPolyPage(WebDriver driver) {              //конструктор страницы
+    /**
+     * --------------     констраутор страницы     --------------
+     */
+    public ConfigPolyPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
-        (new WebDriverWait(driver, 10))      //явное ожидание видимости PageLoadTrigger
+        (new WebDriverWait(driver, 10))    //явное ожидание видимости PageLoadTrigger
                 .until(ExpectedConditions.visibilityOf(pageLoadTrigger));
         this.driver = driver;
     }
 
-    public void setUpFields(String fieldName, String value) {        // по FieldName вызывает метод и передает нужный webElement  и  value
-        switch (fieldName){
-            case  "Фамилия":
+    /**
+     * --------------     по FieldName вызывает метод и передает нужный webElement и value     --------------
+     */
+    public void setUpFields(String fieldName, String value) {
+        switch (fieldName) {
+            case "Фамилия":
                 fillField(surNameInsurant, value);
                 break;
-            case  "Имя":
+            case "Имя":
                 fillField(nameInsurant, value);
                 break;
-            case  "День рождения":
+            case "День рождения":
                 fillField(birthDateInsurant, value);
                 break;
-            case  "Фамилия страхователя":
+            case "Фамилия страхователя":
                 fillField(surNamePolicyHolder, value);
                 break;
-            case  "Имя страхователя":
+            case "Имя страхователя":
                 fillField(namePolicyHolder, value);
                 break;
-            case  "Отчество страхователя":
+            case "Отчество страхователя":
                 fillField(middleNamePolicyHolder, value);
                 break;
-            case  "День рождения страхователя":
+            case "День рождения страхователя":
                 fillField(birthDatePolicyHolder, value);
                 break;
-            case  "Серия паспорта страхователя":
+            case "Серия паспорта страхователя":
                 fillField(docSeriesPolicyHolder, value);
                 break;
-            case  "Номер паспорта страхователя":
+            case "Номер паспорта страхователя":
                 fillField(docNumberPolicyHolder, value);
                 break;
-            case  "Место выдачи паспорта страхователя":
+            case "Дата выдачи паспорта страхователя":
+                fillField(docIssueDate, value);
+                break;
+            case "Место выдачи паспорта страхователя":
                 fillField(docIssuePlace, value);
                 break;
-            default:  throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
+            default:
+                throw new AssertionError("Поле '" + fieldName + "' не объявлено на странице");
         }
     }
 
-    public void fillField(WebElement element, String value) {      //метод заполнения WebElement значением value
+    /**
+     * --------------     метод заполнения WebElement значением value     --------------
+     */
+    public void fillField(WebElement element, String value) {
         element.clear();
         element.sendKeys(value);
     }
 
-    public void checkFieldErrorMessage(String errorMessage) {  //проверка текстовки всплывающей ошибки
-        String actualValue = driver.findElement(By.xpath("//div[contains(text(),'"+ errorMessage +"')]")).getText();
-        Assert.assertEquals("Получено некорректное значение ошибки","Заполнены не все обязательные поля", actualValue );
+    /**
+     * --------------     проверка текстовки всплывающей ошибки   --------------
+     */
+    public void checkFieldErrorMessage(String errorMessage) {
+        String actualValue = driver.findElement(By.xpath("//div[contains(text(),'" + errorMessage + "')]")).getText();
+        Assert.assertEquals("Получено некорректное значение ошибки", "Заполнены не все обязательные поля", actualValue);
     }
 }

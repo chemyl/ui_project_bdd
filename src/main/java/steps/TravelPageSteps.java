@@ -16,4 +16,8 @@ public class TravelPageSteps extends BaseSteps {
         new TravelInsurancePage(driver).onlineIssueBtn.click();
     }
 
+    @Step("Перейти на открывшуюся вкладку регистрации")
+    public void getNewTabWindow(int tabCount) {
+        new BaseSteps().getNewTabWindow(tabCount);
+    }
 }

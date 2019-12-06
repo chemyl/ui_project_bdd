@@ -5,27 +5,22 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.yandex.qatools.allure.annotations.Attachment;
 import util.TestProperties;
 
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
 
 /**
- * Базовый класс шагов, который собирает
- * глобальные методы библиотек и фреймворков
- * Before/AfterClass Attachment
- * Создание driver,properties const
- *
- * */
-
+ * Базовый класс шагов, который собирает глобальные методы библиотек и фреймворков Before/AfterClass Attachment
+ * Создание driver, properties const
+ */
 
 public class BaseSteps {
     protected static WebDriver driver;
-    protected static String baseUrl;
-    public static Properties properties = TestProperties.getInstance().getProperties();
+    private static Properties properties = TestProperties.getInstance().getProperties();
+    protected static String baseUrl = properties.getProperty("app.url");
 
     public static WebDriver getDriver() {
         return driver;
@@ -33,50 +28,21 @@ public class BaseSteps {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        switch (properties.getProperty("browser")) {
-            case "firefox":
-                System.setProperty("webdriver.gecko.driver", properties.getProperty("webdriver.gecko.driver"));
-                driver = new FirefoxDriver();
-                break;
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
-                driver = new ChromeDriver();
-                break;
-            default:
-                System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
-                driver = new ChromeDriver();
-        }
-
-        baseUrl = properties.getProperty("app.url");
-        System.out.println(baseUrl);
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get(baseUrl);
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+    }
+
+    public void getNewTabWindow(int tabNumber) {                            //метод переключения между вкладками
+        ArrayList tabs = new ArrayList(driver.getWindowHandles());          //получение списка табов
+        driver.switchTo().window(String.valueOf(tabs.get(tabNumber)));      //переключение на вторую вкладку
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
         driver.quit();
     }
-
-    protected boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    protected void checkFillField(String value, By locator) {
-        assertEquals(value, driver.findElement(locator).getAttribute("value"));
-    }
-
-    /**
-     * Allure позволяет прикладывать файлы используя аннотацию Attachment
-     * type - тип прикладываемого файла value - название файла в будущем отчете
-     * Метод возвращает массив байтов. Используетмся метод getScreenshotAs (Selenium)
-     * который делает скриншот
-     * */
-
-
 }

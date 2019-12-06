@@ -34,6 +34,7 @@ public class insuranceTest {
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);   //неявное ожидание (просто определенное время)
         String pageTitle = driver.findElement(By.xpath("//h1[contains(text(), 'Страхование путешественников')]")).getText();
         Assert.assertEquals("777", "Страхование путешественников", pageTitle);
+
         driver.findElement(By.xpath("//a[@target ='_blank']/..//img")).click();
         ArrayList tabs2 = new ArrayList(driver.getWindowHandles()); //Получение списка табов
         driver.switchTo().window(String.valueOf(tabs2.get(1)));      // переключение на вторую вкладку

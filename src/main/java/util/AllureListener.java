@@ -1,25 +1,23 @@
 package util;
 
-import org.junit.runner.notification.Failure;
+import steps.BaseSteps;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.junit.runner.notification.Failure;
 import ru.yandex.qatools.allure.annotations.Attachment;
-import ru.yandex.qatools.allure.junit.AllureRunListener;
-import steps.BaseSteps;
 
 /**
- *
  * Класс, методы которого вызываются по определенному событию.
  * В род классе есть дефолтные методы для обработки событий на любом этапе ЖЦ теста.
  * (старт/падене/игнорирование/завершение...)
- *
+ * <p>
  * Переопределение метода testFailure (при падении) - вызвать метод takeScreenshot()
- * */
+ */
 
-public class AllureListener extends ru.yandex.qatools.allure.junit.AllureRunListener{
+public class AllureListener extends ru.yandex.qatools.allure.junit.AllureRunListener {
 
     @Override
-    public void testFailure(Failure failure){
+    public void testFailure(Failure failure) {
         takeScreenshot();
         super.testFailure(failure);
     }

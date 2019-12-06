@@ -1,6 +1,5 @@
 package steps;
 
-import pages.BasePage;
 import pages.MainPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -9,8 +8,6 @@ public class MainPageSteps extends BaseSteps {
     /**
      * Step - метод отображаемый в отчете Allure ({0} - праметр для передачи в метод)
      * В теле метода вызывается selectItemMenu() / selectInsuranceItem() из класса MainPage
-     *
-     *
      */
 
     @Step("Выбрать из основного меню, пункт {0} ")

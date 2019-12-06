@@ -14,7 +14,8 @@ import org.openqa.selenium.support.PageFactory;
  *
  */
 
-public class MainPage extends BasePage{
+public class MainPage{
+    WebDriver driver;
 
     @FindBy(xpath = "//ul[@class ='lg-menu__list']")
     WebElement menuListBar;

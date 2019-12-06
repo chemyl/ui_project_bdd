@@ -18,7 +18,7 @@ public class RefactorPOMTest extends BaseSteps {
 
         TravelInsurancePage travelPage = new TravelInsurancePage(driver);   //инициализация страницы "Страховака для путешественников"
         travelPage.onlineIssueBtn.click();                                  //нажать на кнопку подверждения онлайн
-        travelPage.getNewTabWindow(1);                           //переключение на другую открывшуюся вкладку
+                                   //переключение на другую открывшуюся вкладку
 
         ConfigPolyPage configPage = new ConfigPolyPage(driver);         //в конструкторе зашито ожидание элемента
         configPage.insuranceSumm.click();                               //выбор минимального тарифа
