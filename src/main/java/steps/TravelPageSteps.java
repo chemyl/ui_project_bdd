@@ -3,7 +3,7 @@ package steps;
 import pages.TravelInsurancePage;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class TravelPageSteps extends BaseSteps {
+public class TravelPageSteps {
 
     /**
      * Step - метод отображаемый в отчете Allure ({0} - праметр для передачи в метод)
@@ -13,7 +13,7 @@ public class TravelPageSteps extends BaseSteps {
 
     @Step("Выбрать из списка Онлайн регистарцию и перейти на неё")
     public void clickOnlineRegistrationBtn() {
-        new TravelInsurancePage(driver).onlineIssueBtn.click();
+        new TravelInsurancePage((BaseSteps.getDriver())).onlineIssueBtn.click();
     }
 
     @Step("Перейти на открывшуюся вкладку регистрации")

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import steps.BaseSteps;
 
 /**
  * Класс страницы со всеми необходимыми полями ввода значений,
@@ -68,8 +69,8 @@ public class ConfigPolyPage {
      * --------------     констраутор страницы     --------------
      */
     public ConfigPolyPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        (new WebDriverWait(driver, 10))    //явное ожидание видимости PageLoadTrigger
+        PageFactory.initElements(BaseSteps.getDriver(), this);
+        (new WebDriverWait(BaseSteps.getDriver(), 10))    //явное ожидание видимости PageLoadTrigger
                 .until(ExpectedConditions.visibilityOf(pageLoadTrigger));
         this.driver = driver;
     }

@@ -11,24 +11,37 @@
 
 <!--        БЛОК ПЕРЕМЕННЫХ ДЛЯ ВЕРСИЙ ЗАВИСИМОСТЕЙ ПРОЕКТА-->
     <properties>
-        <allure.version>1.5.2</allure.version>
+        <allure.version>1.6.2</allure.version>
         <aspectj.version>1.8.9</aspectj.version>
         <compiler.version>1.8</compiler.version>
         <selenium.version>3.8.0</selenium.version>
     </properties>
 
     <dependencies>
-<!--        ЗАВИСИМОСТЬ ДЛЯ JUNIT ALLURE ADAPTOR-->
+<!--        ЗАВИСИМОСТЬ ДЛЯ CUCUMBER ALLURE ADAPTOR-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+<!--        ЗАВИСИМОСТЬ ДЛЯ JUNIT ALLURE ADAPTOR-->
+            <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-junit-adaptor</artifactId>
-            <version>${allure.version}</version>
+            <version>1.5.4</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
 <!--        ЗАВИСИСМОСТЬ ДЛЯ LIBRARY SELENIUM-->
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+<!--        ЗАВИСИСМОСТЬ ДЛЯ LIBRARY SELENIUM-->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
         </dependency>
         <dependency>
 <!--        БИБИЛИОТЕКА ДЛЯ ПРОТОКОЛИРОВАНИЯ/ЛОГИРОВАНИЯ-->
@@ -45,9 +58,20 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
-<!--        PLUGIN SUREFIRE ДЛЯ ЗАПУСКА-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <debug>false</debug>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--        PLUGIN SUREFIRE ДЛЯ ЗАПУСКА-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
@@ -59,13 +83,13 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>util.AllureListener</value>
+                            <value>util.AllureReporter</value>
                         </property>
                     </properties>
                 </configuration>
             </plugin>
             <plugin>
-<!--        PLUGIN ДЛЯ ЗАПУСКА ОТЧЕТА НА POST-INTEGRATION СТАДИИ-->
+                <!--        PLUGIN ДЛЯ ЗАПУСКА ОТЧЕТА НА POST-INTEGRATION СТАДИИ-->
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
                 <version>2.5</version>
@@ -80,7 +104,7 @@
                 </executions>
             </plugin>
             <plugin>
-<!--        PLUGIN ДЛЯ MAVEN COMPILER-->
+                <!--        PLUGIN ДЛЯ MAVEN COMPILER-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>

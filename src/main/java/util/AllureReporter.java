@@ -1,9 +1,9 @@
 package util;
 
+import gherkin.formatter.model.Result;
 import steps.BaseSteps;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.junit.runner.notification.Failure;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 /**
@@ -14,12 +14,14 @@ import ru.yandex.qatools.allure.annotations.Attachment;
  * Переопределение метода testFailure (при падении) - вызвать метод takeScreenshot()
  */
 
-public class AllureListener extends ru.yandex.qatools.allure.junit.AllureRunListener {
+public class AllureReporter extends ru.yandex.qatools.allure.cucumberjvm.AllureReporter{
 
     @Override
-    public void testFailure(Failure failure) {
-        takeScreenshot();
-        super.testFailure(failure);
+    public void result (Result testResult) {
+        if (testResult.getStatus().equals("failed")) {
+            takeScreenshot();
+        }
+        super.result(testResult);
     }
 
     @Attachment(type = "image/png", value = "Screenshot")
