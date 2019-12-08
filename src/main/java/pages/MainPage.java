@@ -16,6 +16,7 @@ import steps.BaseSteps;
  */
 
 public class MainPage{
+    WebDriver driver;
 
     @FindBy(xpath = "//ul[@class ='lg-menu__list']")
     WebElement menuListBar;
@@ -23,15 +24,19 @@ public class MainPage{
     @FindBy(xpath = "//span[contains(text(),'Страхование')]")
     WebElement insuranceItemOnBar;
 
-    public MainPage(WebDriver driver) {
+//    @FindBy(xpath = "//a[contains(text(),'Страхование путешественников')]")
+//    WebElement insuranceMenuTab;
+
+    public MainPage() {
         PageFactory.initElements(BaseSteps.getDriver(),this);
     }
 
     public void selectMenuItem(String itemName) {
-        menuListBar.findElement(By.xpath(".//span[contains(text(),'"+ itemName +"')]")).click();
+        menuListBar.findElement(By.xpath("//span[contains(text(),'"+ itemName +"')]")).click();
     }
 
     public void selectInsuranceItem(String itemName) {
-        insuranceItemOnBar.findElement(By.xpath("//a[contains(text(), '"+ itemName +"')]")).click();
+        insuranceItemOnBar.click();
+        driver.findElement(By.xpath("//a[@class ='lg-menu__sub-link'][contains(text(),'"+itemName+"')]")).click();
     }
 }

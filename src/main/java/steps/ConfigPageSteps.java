@@ -34,7 +34,6 @@ public class ConfigPageSteps {
         configPolyPage.continueBtn.click();
     }
 
-
     @Step("Проверка ожидаемой и актуальной ошибки заполнения формы")
     public void checkErrorText(String errorMessage) {
         configPolyPage.checkFieldErrorMessage(errorMessage);

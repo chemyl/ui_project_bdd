@@ -14,15 +14,15 @@ import steps.BaseSteps;
  */
 
 public class TravelInsurancePage {
-    WebDriver driver;
+//    WebDriver driver;
 
     @FindBy(xpath = "//a[@target ='_blank']/..//img")
     public WebElement onlineIssueBtn;
 
 // конструктор страницы
-    public TravelInsurancePage(WebDriver driver) {
+    public TravelInsurancePage() {
         PageFactory.initElements(BaseSteps.getDriver(), this);
-        this.driver = driver;
+//        this.driver = driver;
     }
 
 }

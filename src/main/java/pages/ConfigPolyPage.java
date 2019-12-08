@@ -17,6 +17,23 @@ import steps.BaseSteps;
 
 public class ConfigPolyPage {
     WebDriver driver;
+
+    /**
+     * --------------     констраутор страницы     --------------
+     */
+
+    public ConfigPolyPage(WebDriver driver) {
+        PageFactory.initElements(BaseSteps.getDriver(),this);
+    }
+
+//
+//    public ConfigPolyPage(WebDriver driver) {
+//        PageFactory.initElements(BaseSteps.getDriver(), this);
+//        (new WebDriverWait(BaseSteps.getDriver(), 10))    //явное ожидание видимости PageLoadTrigger
+//                .until(ExpectedConditions.visibilityOf(pageLoadTrigger));
+//        this.driver = driver;
+//    }
+
     /**
      * --------------     инициализация нужных webElement на странице по xpath  --------------
      */
@@ -64,16 +81,6 @@ public class ConfigPolyPage {
 
     @FindBy(xpath = "//span[contains(text(),'Продолжить')]")
     public WebElement confirmBtn;
-
-    /**
-     * --------------     констраутор страницы     --------------
-     */
-    public ConfigPolyPage(WebDriver driver) {
-        PageFactory.initElements(BaseSteps.getDriver(), this);
-        (new WebDriverWait(BaseSteps.getDriver(), 10))    //явное ожидание видимости PageLoadTrigger
-                .until(ExpectedConditions.visibilityOf(pageLoadTrigger));
-        this.driver = driver;
-    }
 
     /**
      * --------------     по FieldName вызывает метод и передает нужный webElement и value     --------------

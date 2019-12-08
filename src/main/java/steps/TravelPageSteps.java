@@ -13,7 +13,7 @@ public class TravelPageSteps {
 
     @Step("Выбрать из списка Онлайн регистарцию и перейти на неё")
     public void clickOnlineRegistrationBtn() {
-        new TravelInsurancePage((BaseSteps.getDriver())).onlineIssueBtn.click();
+        new TravelInsurancePage().onlineIssueBtn.click();
     }
 
     @Step("Перейти на открывшуюся вкладку регистрации")
