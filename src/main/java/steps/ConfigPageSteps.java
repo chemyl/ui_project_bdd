@@ -4,9 +4,11 @@ import java.util.HashMap;
 import pages.ConfigPolyPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static steps.BaseSteps.sleep;
+
 public class ConfigPageSteps {
 
-    ConfigPolyPage configPolyPage = new ConfigPolyPage((BaseSteps.getDriver()));
+    ConfigPolyPage configPolyPage = new ConfigPolyPage();
 
     @Step("Поле {0} заполняется значением {1}")
     public void stepFillField(String field, String value) {
@@ -31,6 +33,7 @@ public class ConfigPageSteps {
 
     @Step("Нажать кнопку продолжить")
     public void continueBtnClick() {
+        sleep(3000);
         configPolyPage.continueBtn.click();
     }
 

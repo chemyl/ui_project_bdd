@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import steps.BaseSteps;
 
 /**
@@ -16,13 +14,11 @@ import steps.BaseSteps;
  */
 
 public class ConfigPolyPage {
-    WebDriver driver;
-
     /**
-     * --------------     констраутор страницы     --------------
+     * --------------     конструктор страницы     --------------
      */
 
-    public ConfigPolyPage(WebDriver driver) {
+    public ConfigPolyPage() {
         PageFactory.initElements(BaseSteps.getDriver(),this);
     }
 
@@ -137,7 +133,7 @@ public class ConfigPolyPage {
      * --------------     проверка текстовки всплывающей ошибки   --------------
      */
     public void checkFieldErrorMessage(String errorMessage) {
-        String actualValue = driver.findElement(By.xpath("//div[contains(text(),'" + errorMessage + "')]")).getText();
+        String actualValue = BaseSteps.getDriver().findElement(By.xpath("//div[contains(text(),'" + errorMessage + "')]")).getText();
         Assert.assertEquals("Получено некорректное значение ошибки", "Заполнены не все обязательные поля", actualValue);
     }
 }

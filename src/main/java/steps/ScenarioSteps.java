@@ -3,6 +3,8 @@ package steps;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static steps.BaseSteps.sleep;
 // ^ - обозначение начала строки и конца - $
 
 public class ScenarioSteps {
@@ -15,12 +17,10 @@ public class ScenarioSteps {
     public void stepSelectMainMenu(String menuItem) {
         mainPageSteps.selectMenuItem(menuItem);
     }
-
     @When("^выбран вид страхования -\"(.*)\"$")
     public void stepSelectInsurranceType(String insurranceType) {
         mainPageSteps.selectInsuranceItem(insurranceType);
     }
-
     @When("Нажата кнопка онлайн регистрации")
     public void stepInsurranceBtnclick() {
         travelPageSteps.clickOnlineRegistrationBtn();
@@ -29,6 +29,7 @@ public class ScenarioSteps {
     @Then("^Переходим на новую вкладку-\"(.*)\"$")
     public void getNewTabWindow(int tabNumber) {
         travelPageSteps.getNewTabWindow(tabNumber);
+        sleep(5000);
     }
 
     @When("Выбирается минимальный вид страхования")
@@ -41,7 +42,7 @@ public class ScenarioSteps {
         configPageSteps.continueBtnClick();
     }
 
-    @Then("Заполняются поля: ")
+    @Then("Заполняются поля :")
     public void stepFillFields(DataTable fields) {
         fields.asMap(String.class, String.class).forEach(
                 (key, value) -> configPageSteps.stepFillField(key, value));
@@ -49,7 +50,7 @@ public class ScenarioSteps {
 
     @When("Нажимется кнопка подтверждения данных")
     public void confirmBtnclick() {
-        configPageSteps.continueBtnClick();
+        configPageSteps.confirmBtnClick();
     }
 
     @Then("^Проверяется текста ошибки\"(.*)\"$")

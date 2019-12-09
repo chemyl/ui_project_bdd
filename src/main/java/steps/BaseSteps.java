@@ -31,14 +31,23 @@ public class BaseSteps {
         driver = new ChromeDriver();
         driver.get(targetUrl);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
     }
 
     public void getNewTabWindow(int tabNumber) {                            //метод переключения между вкладками
         ArrayList tabs = new ArrayList(driver.getWindowHandles());          //получение списка табов
         driver.switchTo().window(String.valueOf(tabs.get(tabNumber)));      //переключение на вторую вкладку
     }
+
+    public static void sleep (long sleep){
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @After
     public static void tearDown() throws Exception {
