@@ -1,12 +1,11 @@
 package pages;
 
+import steps.BaseSteps;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import steps.BaseSteps;
 
 /**
  * Класс страницы со всеми необходимыми полями ввода значений,
@@ -14,29 +13,11 @@ import steps.BaseSteps;
  */
 
 public class ConfigPolyPage {
-    /**
-     * --------------     конструктор страницы     --------------
-     */
-
     public ConfigPolyPage() {
-        PageFactory.initElements(BaseSteps.getDriver(),this);
+        PageFactory.initElements(BaseSteps.getDriver(), this);
     }
 
-//
-//    public ConfigPolyPage(WebDriver driver) {
-//        PageFactory.initElements(BaseSteps.getDriver(), this);
-//        (new WebDriverWait(BaseSteps.getDriver(), 10))    //явное ожидание видимости PageLoadTrigger
-//                .until(ExpectedConditions.visibilityOf(pageLoadTrigger));
-//        this.driver = driver;
-//    }
-
-    /**
-     * --------------     инициализация нужных webElement на странице по xpath  --------------
-     */
-    @FindBy(xpath = "//span[contains(text(),'Выбор полиса')]")      //первая вкладка страницы
-    public WebElement pageLoadTrigger;
-
-    @FindBy(xpath = "//div[contains(text(),'Минимальная')]")       //ставка страхования
+    @FindBy(xpath = "//div[contains(text(),'Минимальная')]")
     public WebElement insuranceSumm;
 
     @FindBy(xpath = "//span[@class = 'b-continue-btn']")
@@ -78,9 +59,7 @@ public class ConfigPolyPage {
     @FindBy(xpath = "//span[contains(text(),'Продолжить')]")
     public WebElement confirmBtn;
 
-    /**
-     * --------------     по FieldName вызывает метод и передает нужный webElement и value     --------------
-     */
+    //      по FieldName вызывает метод и передает нужный webElement и value
     public void setUpFields(String fieldName, String value) {
         switch (fieldName) {
             case "Фамилия":
@@ -121,17 +100,13 @@ public class ConfigPolyPage {
         }
     }
 
-    /**
-     * --------------     метод заполнения WebElement значением value     --------------
-     */
+    //    метод заполнения WebElement значением value
     public void fillField(WebElement element, String value) {
         element.clear();
         element.sendKeys(value);
     }
 
-    /**
-     * --------------     проверка текстовки всплывающей ошибки   --------------
-     */
+    //    проверка текстовки всплывающей ошибки
     public void checkFieldErrorMessage(String errorMessage) {
         String actualValue = BaseSteps.getDriver().findElement(By.xpath("//div[contains(text(),'" + errorMessage + "')]")).getText();
         Assert.assertEquals("Получено некорректное значение ошибки", "Заполнены не все обязательные поля", actualValue);

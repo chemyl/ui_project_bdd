@@ -1,6 +1,5 @@
 package steps;
 
-import pages.ConfigPolyPage;
 import pages.MainPage;
 import ru.yandex.qatools.allure.annotations.Step;
 

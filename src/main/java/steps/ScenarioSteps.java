@@ -17,10 +17,12 @@ public class ScenarioSteps {
     public void stepSelectMainMenu(String menuItem) {
         mainPageSteps.selectMenuItem(menuItem);
     }
+
     @When("^выбран вид страхования -\"(.*)\"$")
     public void stepSelectInsurranceType(String insurranceType) {
         mainPageSteps.selectInsuranceItem(insurranceType);
     }
+
     @When("Нажата кнопка онлайн регистрации")
     public void stepInsurranceBtnclick() {
         travelPageSteps.clickOnlineRegistrationBtn();
@@ -57,5 +59,4 @@ public class ScenarioSteps {
     public void errorMessagaCheck(String message) {
         configPageSteps.checkErrorText(message);
     }
-
 }

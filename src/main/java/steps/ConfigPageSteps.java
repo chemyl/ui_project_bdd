@@ -1,40 +1,37 @@
 package steps;
 
-import java.util.HashMap;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import pages.ConfigPolyPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static steps.BaseSteps.sleep;
 
 public class ConfigPageSteps {
-
+    WebDriver driver = BaseSteps.getDriver();
+    Actions builder = new Actions(driver);
     ConfigPolyPage configPolyPage = new ConfigPolyPage();
+
 
     @Step("Поле {0} заполняется значением {1}")
     public void stepFillField(String field, String value) {
         configPolyPage.setUpFields(field, value);
     }
 
-    // для каждой пары элементов hashmap вызвать метод stepFillField  и  передать туда значения этой пары
-    @Step("Заполняются поля через HashMap")
-    public void setUpInput(HashMap<String, String> values) {
-        values.forEach((key, value) -> stepFillField(key,value));
-    }
-
     @Step("Нажать кнопку подтверждения")
     public void confirmBtnClick() {
-        configPolyPage.confirmBtn.click();
+        builder.moveToElement(configPolyPage.confirmBtn).click().build().perform();
     }
 
     @Step("Выбрать минимальный тариф страховки")
     public void continueMinTarif() {
-        configPolyPage.insuranceSumm.click();
+        builder.moveToElement(configPolyPage.insuranceSumm).click().build().perform();
     }
 
     @Step("Нажать кнопку продолжить")
     public void continueBtnClick() {
         sleep(3000);
-        configPolyPage.continueBtn.click();
+        builder.moveToElement(configPolyPage.continueBtn).click().build().perform();
     }
 
     @Step("Проверка ожидаемой и актуальной ошибки заполнения формы")

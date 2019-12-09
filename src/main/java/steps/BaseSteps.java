@@ -40,15 +40,13 @@ public class BaseSteps {
         driver.switchTo().window(String.valueOf(tabs.get(tabNumber)));      //переключение на вторую вкладку
     }
 
-    public static void sleep (long sleep){
+    public static void sleep(long sleep) {
         try {
             Thread.sleep(sleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
     @After
     public static void tearDown() throws Exception {
         driver.quit();
