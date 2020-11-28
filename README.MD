@@ -15,5 +15,3 @@
 Use simple BDD Gherkin annotations to create *.feature* file
 to test the interface via Selenium WebDriver.
 @replicantDuke
-
-
