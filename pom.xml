@@ -59,12 +59,6 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-<!--                    <properties>-->
-<!--                        <property>-->
-<!--                            <name>listener</name>-->
-<!--                            <value>util.AllureListener</value>-->
-<!--                        </property>-->
-<!--                    </properties>-->
                 </configuration>
             </plugin>
             <plugin>
